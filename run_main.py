@@ -82,7 +82,7 @@ parser.add_argument('--llm_dim', type=int, default='4096', help='LLM model dimen
 
 
 # optimization
-parser.add_argument('--num_workers', type=int, default=10, help='data loader num workers')
+parser.add_argument('--num_workers', type=int, default=0, help='data loader num workers')
 parser.add_argument('--itr', type=int, default=1, help='experiments times')
 parser.add_argument('--train_epochs', type=int, default=10, help='train epochs')
 parser.add_argument('--align_epochs', type=int, default=10, help='alignment epochs')
@@ -122,6 +122,8 @@ for ii in range(args.itr):
         args.factor,
         args.embed,
         args.des, ii)
+
+    print(args)
 
     train_data, train_loader = data_provider(args, 'train')
     vali_data, vali_loader = data_provider(args, 'val')

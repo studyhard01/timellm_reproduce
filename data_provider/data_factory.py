@@ -10,6 +10,7 @@ data_dict = {
     'Traffic': Dataset_Custom,
     'Weather': Dataset_Custom,
     'm4': Dataset_M4,
+    'ecg' : Dataset_ECG
 }
 
 
@@ -42,6 +43,8 @@ def data_provider(args, flag):
             freq=freq,
             seasonal_patterns=args.seasonal_patterns
         )
+
+    
     else:
         data_set = Data(
             root_path=args.root_path,
@@ -55,10 +58,12 @@ def data_provider(args, flag):
             percent=percent,
             seasonal_patterns=args.seasonal_patterns
         )
+        
     data_loader = DataLoader(
         data_set,
         batch_size=batch_size,
         shuffle=shuffle_flag,
         num_workers=args.num_workers,
         drop_last=drop_last)
+    
     return data_set, data_loader

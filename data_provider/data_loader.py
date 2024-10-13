@@ -9,12 +9,21 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
+class Dataset_ECG(Dataset):
+    def __init__(self, root_path, flag='train', size=None,
+                 features='S', data_path='ETTh1.csv',
+                 target='OT', scale=True, timeenc=0, freq='s', percent=100,
+                 seasonal_patterns=None):
+        pass
+    
+
 
 class Dataset_ETT_hour(Dataset):
     def __init__(self, root_path, flag='train', size=None,
                  features='S', data_path='ETTh1.csv',
                  target='OT', scale=True, timeenc=0, freq='h', percent=100,
                  seasonal_patterns=None):
+        
         if size == None:
             self.seq_len = 24 * 4 * 4
             self.label_len = 24 * 4
@@ -137,6 +146,10 @@ class Dataset_ETT_minute(Dataset):
         self.data_path = data_path
         self.__read_data__()
 
+        print(self.data_x)
+        print(self.data_y)
+        print(self.data_stamp)
+        
         self.enc_in = self.data_x.shape[-1]
         self.tot_len = len(self.data_x) - self.seq_len - self.pred_len + 1
 
